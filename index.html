@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="ilb/iconfont/D3III20gfBasic/iconfont.css">
 	<link rel="stylesheet" href="ilb/iconfont/D3III24glBasic/iconfont.css">
 	<link rel="stylesheet" href="ilb/iconfont/D3III24gfBasic/iconfont.css">
+	<link rel="stylesheet" href="ilb/iconfont/D3III16glMobius/iconfont.css">
 	<link rel="stylesheet" href="ilb/css/style.css">
 	<script src="ilb/js/vue2517.js"></script>
 	<script src="ilb/iconfont/D3III16glBasic/iconfont.js"></script>
@@ -17,180 +18,52 @@
 	<script src="ilb/iconfont/D3III20gfBasic/iconfont.js"></script>
 	<script src="ilb/iconfont/D3III24glBasic/iconfont.js"></script>
 	<script src="ilb/iconfont/D3III24gfBasic/iconfont.js"></script>
+	<script src="ilb/iconfont/D3III16glMobius/iconfont.js"></script>
 	<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
 </head>
 <body>
 	<div id="app" v-cloak>
-		<iconfont :iconfontlists="lists"></iconfont>
+		<header class="nav fb">
+			<div class="fb ali_ite_cen">
+				<div class="logo"></div>
+				<h1>D³个人图标字体项目（长期补充更新）</h1>
+			</div>
+			<ul class="tab fb">
+				<li v-for="(item, index) in tabs" :key="item.id" :class="isActive === index ? 'active' : ''" @click="checkItem(index)">{{ item.text }}</li>
+			</ul>
+			<div :class="changeArrow">
+				<div class="f1"></div>
+				<select class="" name="" id="" v-model="iconfontSize" @change="changeIconfontSize(iconfontSize)" @click="changeFocus(isFocus=!isFocus)">
+					<option v-for="(item, index) in iconfontSizes" :key="item.index" :value="item">{{ `${item*10}px` }}</option>
+				</select>
+			</div>
+		</header>
+		<iconfont :iconfontlists="lists" :grid="grid" :istyle="iconfontStyle"></iconfont>
+		<footer>Copyright 2018-2019 © by D³</footer>
 	</div>
 	<template id="iconfont">
 		<div>
 			<div class="iconfont" v-for="item in iconfontlists" :key="item.id">
 				<h3>{{ item.title }}</h3>
 				<ul class="fb fle_wra">
-					<li class="f1" v-for="item in item.content" :key="item.id">
-						<svg class="icon" aria-hidden="true">
-							<use :xlink:href="`#icon-16gl-${item.name}`"></use>
+					<li class="" v-for="item in item.content" :key="item.id">
+						<svg class="icon" aria-hidden="true" :style="istyle">
+							<use :xlink:href="`#icon-${grid}-${item.name}`"></use>
 						</svg>
-						<div class="name">{{ `16gl-${item.name}` }}</div>
-						<div class="unicode-name">{{ item.codename }}</div>
-						<!-- <div class="fontClass-name">{{ `.icon-16gl-${item.name}` }}</div> -->
-						<!-- <div class="symbol-name">{{ `#icon-16gl-${item.name}` }}</div> -->
-						<div class="tag">{{ item.tag }}</div>
+						<div class="explain">
+							<div class="name">{{ `${grid}-${item.name}` }}</div>
+							<!-- <div class="unicode-name">{{ item.codename }}</div> -->
+							<!-- <div class="fontClass-name">{{ `.icon-${grid}-${item.name}` }}</div> -->
+							<!-- <div class="symbol-name">{{ `#icon-${grid}-${item.name}` }}</div> -->
+							<div class="tag">{{ item.tag }}</div>
+						</div>
+						
 					</li>
 				</ul>
 			</div>
 		</div>
 
 	</template>
-	<script>
-		var vm = new Vue ({
-			el: '#app',
-			data: {
-				lists: [
-					{
-						id: 1,
-						title: '1-1-Home & Building（首页 & 建筑）',
-						content: [
-							{id: 1, name: 'bricks', codename: '&#xe812;', tag: '砖,墙'},
-							{id: 2, name: 'building', codename: '&#xe810;', tag: '建筑,大楼,大厦,楼宇'},
-							{id: 3, name: 'building2', codename: '&#xe814;', tag: '建筑,大楼,大厦,楼宇'},
-							{id: 4, name: 'building3', codename: '&#xe811;', tag: '建筑,大楼,大厦,楼宇'},
-							{id: 5, name: 'church', codename: '&#xe813;', tag: '教堂,礼拜堂'},
-							{id: 6, name: 'city', codename: '&#xe815;', tag: '城市,建筑,楼宇'},
-							{id: 7, name: 'city2', codename: '&#xe817;', tag: '城市,建筑,楼宇'},
-							{id: 8, name: 'city3', codename: '&#xe818;', tag: '城市,建筑,楼宇'},
-							{id: 9, name: 'city4', codename: '&#xe81a;', tag: '城市,建筑,楼宇'},
-							{id: 10, name: 'door', codename: '&#xe816;', tag: '门'},
-							{id: 11, name: 'fence', codename: '&#xe825;', tag: '围栏,围墙,栅栏,篱笆,防护物'},
-							{id: 12, name: 'gate', codename: '&#xe81d;', tag: '大门,栅栏门,围墙门'},
-							{id: 13, name: 'gate2', codename: '&#xe81c;', tag: '大门,栅栏门,围墙门'},
-							{id: 14, name: 'home', codename: '&#xe810;', tag: '家,首页'},
-							{id: 15, name: 'home2', codename: '&#xe810;', tag: '家,首页'},
-							{id: 16, name: 'home3', codename: '&#xe810;', tag: '家,首页'},
-							{id: 17, name: 'home4', codename: '&#xe810;', tag: '家,首页'},
-							{id: 18, name: 'home5', codename: '&#xe810;', tag: '家,首页'},
-							{id: 19, name: 'home6', codename: '&#xe810;', tag: '家,首页'},
-							{id: 20, name: 'home7', codename: '&#xe810;', tag: '家,首页'},
-							{id: 21, name: 'home8', codename: '&#xe810;', tag: '家,首页'},
-							{id: 22, name: 'home9', codename: '&#xe810;', tag: '家,首页'},
-							{id: 23, name: 'home10', codename: '&#xe810;', tag: '家,首页'},
-							{id: 24, name: 'home11', codename: '&#xe810;', tag: '家,首页'},
-							{id: 25, name: 'home12', codename: '&#xe810;', tag: '家,首页'},
-							{id: 26, name: 'hospital', codename: '&#xe810;', tag: '医院'},
-							{id: 27, name: 'hotel', codename: '&#xe810;', tag: '酒店'},
-							{id: 28, name: 'hotel2', codename: '&#xe810;', tag: '酒店'},
-							{id: 29, name: 'school', codename: '&#xe810;', tag: '学校'},
-							{id: 30, name: 'store', codename: '&#xe810;', tag: '商店,便利店'},
-							{id: 31, name: 'store2', codename: '&#xe810;', tag: '商店,便利店'},
-							{id: 32, name: 'window', codename: '&#xe810;', tag: '窗,窗口,窗户'},
-						]
-					},				
-					{
-						id: 2,
-						title: '2-1-Business & Stats（商业 & 业务 & 统计）',
-						content: [
-							{id: 1, name: 'chartBarDownward', codename: '&#xe810;', tag: '图表向下,业务统计,商业图表,统计,条形图'},
-							{id: 2, name: 'chartBarUpward', codename: '&#xe810;', tag: '图表向上,业务统计,商业图表,统计,条形图'},
-							{id: 3, name: 'chartLineDownward', codename: '&#xe810;', tag: '图表向下,业务统计,商业图表,统计,线形图,折线图'},
-							{id: 4, name: 'chartLineUpward', codename: '&#xe810;', tag: '图表向上,业务统计,商业图表,统计,线形图,折线图'},
-							{id: 5, name: 'chartPie', codename: '&#xe810;', tag: '饼状图,扇形图表,业务统计,商业图表,统计'},
-							{id: 6, name: 'chartScatter', codename: '&#xe810;', tag: '散点图,散点图表,业务统计,商业图表,统计'},
-						]
-					},
-					{
-						id: 3,
-						title: '3-1-Shopping & Money（购物 & 金钱）',
-						content: [
-							{id: 1, name: 'bag', codename: '&#xe812;', tag: '袋子,购物袋'},
-							{id: 2, name: 'bag2', codename: '&#xe810;', tag: '袋子,购物袋'},
-							{id: 3, name: 'bagFull', codename: '&#xe814;', tag: '袋子,购物袋,袋满,装满袋子'},
-							{id: 4, name: 'bagFull2', codename: '&#xe811;', tag: '袋子,购物袋,袋满,装满袋子'},
-							{id: 5, name: 'banknote', codename: '&#xe813;', tag: '钞票,纸币,钱'},
-							{id: 6, name: 'banknotes', codename: '&#xe815;', tag: '钞票,纸币,钱,一叠钞票,一叠纸币,一叠钱'},
-							{id: 7, name: 'box', codename: '&#xe817;', tag: '箱,箱子,纸箱'},
-							{id: 8, name: 'box2', codename: '&#xe818;', tag: '箱,箱子,纸箱'},
-							{id: 9, name: 'cart', codename: '&#xe81a;', tag: '购物车,手推车'},
-							{id: 10, name: 'cart2', codename: '&#xe816;', tag: '购物车,手推车'},
-							{id: 11, name: 'cart3', codename: '&#xe825;', tag: '购物车,手推车'},
-							{id: 12, name: 'cart4', codename: '&#xe81d;', tag: '购物车,手推车'},
-							{id: 13, name: 'cart5', codename: '&#xe81c;', tag: '购物车,手推车'},
-							{id: 14, name: 'cart6', codename: '&#xe810;', tag: '购物车,手推车'},
-							{id: 15, name: 'cart7', codename: '&#xe810;', tag: '购物车,手推车'},
-							{id: 16, name: 'cart8', codename: '&#xe810;', tag: '购物车,手推车'},
-							{id: 17, name: 'cart9', codename: '&#xe810;', tag: '购物车,手推车'},
-							{id: 18, name: 'cart10', codename: '&#xe810;', tag: '购物车,手推车'},
-							{id: 19, name: 'cartFull', codename: '&#xe810;', tag: '购物车,手推车,购物车已满,手推车已满'},
-							{id: 20, name: 'cartFull2', codename: '&#xe810;', tag: '购物车,手推车,购物车已满,手推车已满'},
-							{id: 21, name: 'cartFull3', codename: '&#xe810;', tag: '购物车,手推车,购物车已满,手推车已满'},
-							{id: 22, name: 'cartFull4', codename: '&#xe810;', tag: '购物车,手推车,购物车已满,手推车已满'},
-							{id: 23, name: 'cartFull5', codename: '&#xe810;', tag: '购物车,手推车,购物车已满,手推车已满'},
-							{id: 24, name: 'cartFull6', codename: '&#xe810;', tag: '购物车,手推车,购物车已满,手推车已满'},
-							{id: 25, name: 'cartFull7', codename: '&#xe810;', tag: '购物车,手推车,购物车已满,手推车已满'},
-							{id: 26, name: 'cartFull8', codename: '&#xe810;', tag: '购物车,手推车,购物车已满,手推车已满'},
-							{id: 27, name: 'cartFull9', codename: '&#xe810;', tag: '购物车,手推车,购物车已满,手推车已满'},
-							{id: 28, name: 'cartFull10', codename: '&#xe810;', tag: '购物车,手推车,购物车已满,手推车已满'},
-							{id: 29, name: 'debitCard', codename: '&#xe810;', tag: '借记卡,银行卡,信用卡,储蓄卡'},
-							{id: 30, name: 'receipt', codename: '&#xe810;', tag: '收据,发票,收入,账单'},
-							{id: 31, name: 'receipt2', codename: '&#xe810;', tag: '收据,发票,收入,账单'},
-							{id: 32, name: 'scanCode', codename: '&#xe810;', tag: '扫码,扫二维码,扫条形码'},
-							{id: 33, name: 'scanCode2', codename: '&#xe810;', tag: '扫码,扫二维码,扫条形码'},
-							{id: 34, name: 'tag', codename: '&#xe810;', tag: '标签'},
-							{id: 35, name: 'tag2', codename: '&#xe810;', tag: '标签'},
-							{id: 36, name: 'tags', codename: '&#xe810;', tag: '标签,多标签,多个标签'},
-							{id: 37, name: 'tags2', codename: '&#xe810;', tag: '标签,多标签,多个标签'},
-							{id: 38, name: 'tags3', codename: '&#xe810;', tag: '标签,多标签,多个标签'},
-							{id: 39, name: 'tags4', codename: '&#xe810;', tag: '标签,多标签,多个标签'},
-							{id: 40, name: 'wallet', codename: '&#xe810;', tag: '钱包,皮夹子'},
-						]
-					},
-					{
-						id: 4,
-						title: '4-2-2-Math & Arithmetic（数学 & 算术）',
-						content: [
-							{id: 1, name: 'minus', codename: '&#xe812;', tag: '减,减号,减法'},
-							{id: 2, name: 'minusCircle', codename: '&#xe810;', tag: '减,减号,减法,删除,移除'},
-							{id: 3, name: 'obelus', codename: '&#xe814;', tag: '除,除号,除法'},
-							{id: 4, name: 'plus', codename: '&#xe811;', tag: '百分比,百分号,百分数'},
-							{id: 5, name: 'plusCircle', codename: '&#xe813;', tag: '加,加号,加法,添加,新建'},
-							{id: 6, name: 'plusMinus', codename: '&#xe815;', tag: '加,加号,加法,添加,新建'},
-							{id: 7, name: 'box', codename: '&#xe817;', tag: '正负,正负号,加减,加减号'},
-						]
-					},
-				]
-			},
-			methods: {
-				/*getjson() {
-					axios.post('iconfont.json', {
-					    firstName: 'Fred',
-					    lastName: 'Flintstone'
-					  })
-					  .then(function (response) {
-					    console.log(response);
-					    alert('saa');
-					  })
-					  .catch(function (error) {
-					    console.log(error);
-					  });
-				}*/
-			},
-			components: {
-				iconfont: {
-					template: '#iconfont',
-					data() {
-						return {
-						}
-					},
-					props: [
-						'iconfontlists'
-					]
-				}
-			},
-			created() {
-				// this.getjson();
-			},
-		});
-
-	</script>
+	<script src="ilb/js/index.js"></script>
 </body>
 </html>
