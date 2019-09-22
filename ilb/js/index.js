@@ -120,10 +120,10 @@ var vm = new Vue ({
           {id: 1, name: 'minus', codename: '&#xe812;', tag: '减,减号,减法'},
           {id: 2, name: 'minusCircle', codename: '&#xe810;', tag: '减,减号,减法,删除,移除'},
           {id: 3, name: 'obelus', codename: '&#xe814;', tag: '除,除号,除法'},
-          {id: 4, name: 'plus', codename: '&#xe811;', tag: '百分比,百分号,百分数'},
+          {id: 4, name: 'plus', codename: '&#xe811;', tag: '加,加号,加法,添加,新建'},
           {id: 5, name: 'plusCircle', codename: '&#xe813;', tag: '加,加号,加法,添加,新建'},
-          {id: 6, name: 'plusMinus', codename: '&#xe815;', tag: '加,加号,加法,添加,新建'},
-          {id: 7, name: 'box', codename: '&#xe817;', tag: '正负,正负号,加减,加减号'}
+          {id: 6, name: 'plusMinus', codename: '&#xe815;', tag: '正负,正负号,加减,加减号'},
+          {id: 7, name: 'percent', codename: '&#xe817;', tag: '百分比,百分号,百分数'}
         ]
       },
       {
